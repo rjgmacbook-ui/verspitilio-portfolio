@@ -1,65 +1,362 @@
-import Image from "next/image";
+const BatIcon = ({ className, style }: { className?: string; style?: React.CSSProperties }) => (
+  <svg
+    className={className}
+    viewBox="0 0 100 60"
+    fill="currentColor"
+    xmlns="http://www.w3.org/2000/svg"
+    aria-hidden="true"
+    style={style}
+  >
+    <path d="M50 30
+      C50 20 44 10 35 8
+      C28 6 20 10 15 5
+      C10 0 5 2 2 6
+      C8 8 12 14 10 20
+      C8 26 2 28 0 34
+      C6 32 12 30 18 34
+      C22 37 24 44 28 48
+      C32 52 38 54 42 50
+      C45 47 46 42 50 40
+      C54 42 55 47 58 50
+      C62 54 68 52 72 48
+      C76 44 78 37 82 34
+      C88 30 94 32 100 34
+      C98 28 92 26 90 20
+      C88 14 92 8 98 6
+      C95 2 90 0 85 5
+      C80 10 72 6 65 8
+      C56 10 50 20 50 30Z
+      M50 38 C47 42 44 46 50 50 C56 46 53 42 50 38Z" />
+  </svg>
+);
+
+function Nav() {
+  return (
+    <nav
+      className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 py-6 md:px-16"
+      style={{ borderBottom: "1px solid rgba(232,224,208,0.08)" }}
+    >
+      <div className="flex items-center gap-3">
+        <BatIcon className="w-8 h-5 opacity-90" />
+        <div className="leading-none">
+          <div
+            style={{
+              fontFamily: "var(--font-serif)",
+              fontSize: "0.95rem",
+              letterSpacing: "0.25em",
+              fontWeight: 600,
+            }}
+          >
+            VESPERTILIO
+          </div>
+          <div
+            style={{
+              fontFamily: "var(--font-mono)",
+              fontSize: "0.5rem",
+              letterSpacing: "0.3em",
+              opacity: 0.5,
+              marginTop: "2px",
+            }}
+          >
+            MOTION PICTURES
+          </div>
+        </div>
+      </div>
+
+      <ul
+        className="hidden md:flex items-center gap-10"
+        style={{
+          fontFamily: "var(--font-mono)",
+          fontSize: "0.65rem",
+          letterSpacing: "0.25em",
+          opacity: 0.6,
+        }}
+      >
+        {["Work", "About", "Contact"].map((item) => (
+          <li key={item}>
+            <a
+              href="#"
+              className="hover:opacity-100 transition-opacity duration-300"
+              style={{ textTransform: "uppercase" }}
+            >
+              {item}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  );
+}
+
+function Hero() {
+  return (
+    <>
+      <style>{`
+        @keyframes fadeUp {
+          from { opacity: 0; transform: translateY(22px); }
+          to   { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeIn {
+          from { opacity: 0; }
+          to   { opacity: 1; }
+        }
+        @keyframes batBreathe {
+          0%, 100% { opacity: 0.038; transform: scale(1) translateY(0px); }
+          50%       { opacity: 0.055; transform: scale(1.025) translateY(-6px); }
+        }
+        @keyframes lightLeak {
+          0%   { transform: translateX(-120%) skewX(-12deg); opacity: 0; }
+          15%  { opacity: 1; }
+          85%  { opacity: 1; }
+          100% { transform: translateX(220%) skewX(-12deg); opacity: 0; }
+        }
+        @keyframes scanPulse {
+          0%, 100% { opacity: 0.018; }
+          50%       { opacity: 0.032; }
+        }
+        @keyframes accentGrow {
+          from { transform: scaleX(0); transform-origin: left; }
+          to   { transform: scaleX(1); transform-origin: left; }
+        }
+        @keyframes counterFlicker {
+          0%, 92%, 95%, 100% { opacity: 0.22; }
+          93%, 94%           { opacity: 0.08; }
+        }
+
+        .hero-fade-1 { animation: fadeUp 1.8s cubic-bezier(0.16,1,0.3,1) 0.3s both; }
+        .hero-fade-2 { animation: fadeUp 1.6s cubic-bezier(0.16,1,0.3,1) 1.0s both; }
+        .hero-fade-3 { animation: fadeIn 1.8s ease 1.8s both; }
+        .hero-fade-6 { animation: fadeIn 2.4s ease 2.4s both; }
+
+        .bat-watermark {
+          animation: batBreathe 9s ease-in-out infinite;
+        }
+        .light-leak {
+          animation: lightLeak 14s ease-in-out 3s infinite;
+        }
+        .scan-lines {
+          animation: scanPulse 6s ease-in-out infinite;
+        }
+        .accent-line {
+          animation: accentGrow 1.2s cubic-bezier(0.16,1,0.3,1) 1.2s both;
+        }
+        .frame-counter {
+          animation: counterFlicker 8s ease-in-out 4s infinite;
+        }
+      `}</style>
+
+      <section className="grain relative min-h-screen overflow-hidden flex flex-col">
+
+        {/* Deep vignette — heavier at edges */}
+        <div
+          className="pointer-events-none absolute inset-0 z-10"
+          style={{
+            background: `
+              radial-gradient(ellipse 80% 80% at 50% 50%, transparent 30%, rgba(0,0,0,0.6) 100%),
+              linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, transparent 20%, transparent 75%, rgba(0,0,0,0.7) 100%)
+            `,
+          }}
+        />
+
+        {/* Scan lines texture */}
+        <div
+          className="scan-lines pointer-events-none absolute inset-0 z-10"
+          style={{
+            backgroundImage: "repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(232,224,208,0.03) 3px, rgba(232,224,208,0.03) 4px)",
+          }}
+        />
+
+        {/* Amber light leak — film scratch effect */}
+        <div
+          className="light-leak pointer-events-none absolute inset-y-0 z-20"
+          style={{
+            left: 0,
+            width: "6px",
+            background: "linear-gradient(to right, transparent, rgba(201,168,76,0.18), rgba(201,168,76,0.35), rgba(201,168,76,0.18), transparent)",
+            filter: "blur(8px)",
+          }}
+        />
+
+        {/* Bat watermark — upper right, breathing */}
+        <BatIcon
+          className="bat-watermark pointer-events-none absolute"
+          style={{
+            top: "8%",
+            right: "-4%",
+            width: "clamp(260px, 38vw, 520px)",
+            color: "#c9a84c",
+          }}
+        />
+
+        {/* Frame counter — top right corner */}
+        <div
+          className="frame-counter absolute z-30"
+          style={{
+            top: "6.5rem",
+            right: "clamp(2rem, 4vw, 4rem)",
+            fontFamily: "var(--font-mono)",
+            fontSize: "0.5rem",
+            letterSpacing: "0.25em",
+            color: "#e8e0d0",
+            lineHeight: 1.8,
+          }}
+        >
+          <div>001 / ∞</div>
+          <div style={{ opacity: 0.5 }}>MMXXV</div>
+        </div>
+
+        {/* Main content — lower left anchor */}
+        <div
+          className="relative z-30 flex flex-col justify-end flex-1"
+          style={{
+            padding: "clamp(2rem, 5vw, 5rem)",
+            paddingBottom: "clamp(5rem, 10vh, 9rem)",
+            maxWidth: "min(1000px, 92vw)",
+          }}
+        >
+          {/* Amber accent rule */}
+          <div
+            className="accent-line"
+            style={{
+              width: "52px",
+              height: "1px",
+              background: "#c9a84c",
+              marginBottom: "1.6rem",
+            }}
+          />
+
+          {/* Name — the centrepiece */}
+          <h1
+            className="hero-fade-1"
+            style={{
+              fontFamily: "var(--font-mono)",
+              fontStyle: "normal",
+              fontWeight: 300,
+              fontSize: "clamp(3.2rem, 8.5vw, 7.5rem)",
+              lineHeight: 1.0,
+              color: "#e8e0d0",
+              letterSpacing: "-0.03em",
+              opacity: 0,
+              marginBottom: "0.2em",
+            }}
+          >
+            Santosh MP
+          </h1>
+
+          {/* Profession */}
+          <p
+            className="hero-fade-2"
+            style={{
+              fontFamily: "var(--font-mono)",
+              fontSize: "0.6rem",
+              letterSpacing: "0.4em",
+              color: "#c9a84c",
+              opacity: 0,
+              textTransform: "uppercase",
+              marginBottom: "2.5rem",
+            }}
+          >
+            Filmmaker · Independent Cinema
+          </p>
+
+          {/* Copy + CTA */}
+          <div className="hero-fade-3" style={{ opacity: 0, display: "flex", flexDirection: "column", alignItems: "flex-start", gap: "1.8rem" }}>
+            <p
+              style={{
+                fontFamily: "var(--font-mono)",
+                fontStyle: "normal",
+                fontWeight: 300,
+                fontSize: "clamp(0.7rem, 1.1vw, 0.85rem)",
+                color: "#e8e0d0",
+                opacity: 0.5,
+                lineHeight: 1.9,
+                maxWidth: "360px",
+                letterSpacing: "0.05em",
+              }}
+            >
+              He doesn&apos;t document the world.
+              <br />
+              He decides what it means.
+            </p>
+            <a
+              href="#"
+              style={{
+                fontFamily: "var(--font-mono)",
+                fontSize: "0.6rem",
+                letterSpacing: "0.25em",
+                textTransform: "uppercase",
+                color: "#0a0a0a",
+                background: "#c9a84c",
+                padding: "0.85rem 1.8rem",
+                textDecoration: "none",
+                transition: "background 0.3s ease",
+                display: "inline-block",
+              }}
+              className="cta-btn"
+            >
+              Get in Touch
+            </a>
+          </div>
+        </div>
+
+        {/* Bottom bar */}
+        <div
+          className="hero-fade-6 absolute bottom-0 left-0 right-0 z-30 flex items-center justify-between"
+          style={{
+            padding: "1.5rem clamp(2rem, 5vw, 5rem)",
+            borderTop: "1px solid rgba(232,224,208,0.07)",
+            opacity: 0,
+          }}
+        >
+          {/* Scroll indicator */}
+          <div
+            style={{
+              fontFamily: "var(--font-mono)",
+              fontSize: "0.48rem",
+              letterSpacing: "0.4em",
+              opacity: 0.3,
+              writingMode: "horizontal-tb",
+              textTransform: "uppercase",
+              display: "flex",
+              alignItems: "center",
+              gap: "0.8rem",
+            }}
+          >
+            <span
+              style={{
+                display: "inline-block",
+                width: "28px",
+                height: "1px",
+                background: "rgba(232,224,208,0.3)",
+              }}
+            />
+            Scroll
+          </div>
+
+          {/* Right: film format label */}
+          <div
+            style={{
+              fontFamily: "var(--font-mono)",
+              fontSize: "0.48rem",
+              letterSpacing: "0.3em",
+              opacity: 0.2,
+              textTransform: "uppercase",
+            }}
+          >
+            35mm · Anamorphic
+          </div>
+        </div>
+
+      </section>
+    </>
+  );
+}
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+    <main>
+      <Nav />
+      <Hero />
+    </main>
   );
 }
