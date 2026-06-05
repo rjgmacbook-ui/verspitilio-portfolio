@@ -37,7 +37,7 @@ const films = [
   },
 ]
 
-const TARGET_FPS = 8
+const TARGET_FPS = 24
 
 function FilmVideoPlayer({ src, active }: { src: string; active: boolean }) {
   const videoRef = useRef<HTMLVideoElement>(null)

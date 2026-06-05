@@ -150,9 +150,9 @@ function Hero() {
             </p>
             <div className="hero-fade-3" style={{ opacity: 0, display: "flex", flexDirection: "column", alignItems: "flex-start", gap: "1.8rem" }}>
               <p style={{ fontFamily: "var(--font-mono)", fontWeight: 300, fontSize: "clamp(0.7rem, 1.1vw, 0.85rem)", color: "#e8e0d0", opacity: 0.5, lineHeight: 1.9, maxWidth: "360px", letterSpacing: "0.05em" }}>
-                He doesn&apos;t document the world.
+                I haven't watched LOTR yet.
                 <br />
-                He decides what it means.
+                Peggy Olson to come up with something witty here.
               </p>
               <a href="#" className="cta-btn" style={{ fontFamily: "var(--font-mono)", fontSize: "0.6rem", letterSpacing: "0.25em", textTransform: "uppercase", color: "#0a0a0a", background: "#c9a84c", padding: "0.85rem 1.8rem", textDecoration: "none", transition: "background 0.3s ease", display: "inline-block" }}>
                 Get in Touch
