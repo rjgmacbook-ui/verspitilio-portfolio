@@ -1,96 +1,9 @@
 import { FilmList } from "@/components/ui/film-list"
+import { SimpleHeader } from "@/components/ui/simple-header"
 // import { RadialGlowBackground } from "@/components/ui/radial-glow-background"
 import MistBackground from "@/components/ui/realistic-fog-background"
+// import { GradientBackground4 } from "@/components/ui/gradient-background-4"
 
-const BatIcon = ({ className, style }: { className?: string; style?: React.CSSProperties }) => (
-  <svg
-    className={className}
-    viewBox="0 0 100 60"
-    fill="currentColor"
-    xmlns="http://www.w3.org/2000/svg"
-    aria-hidden="true"
-    style={style}
-  >
-    <path d="M50 30
-      C50 20 44 10 35 8
-      C28 6 20 10 15 5
-      C10 0 5 2 2 6
-      C8 8 12 14 10 20
-      C8 26 2 28 0 34
-      C6 32 12 30 18 34
-      C22 37 24 44 28 48
-      C32 52 38 54 42 50
-      C45 47 46 42 50 40
-      C54 42 55 47 58 50
-      C62 54 68 52 72 48
-      C76 44 78 37 82 34
-      C88 30 94 32 100 34
-      C98 28 92 26 90 20
-      C88 14 92 8 98 6
-      C95 2 90 0 85 5
-      C80 10 72 6 65 8
-      C56 10 50 20 50 30Z
-      M50 38 C47 42 44 46 50 50 C56 46 53 42 50 38Z" />
-  </svg>
-);
-
-function Nav() {
-  return (
-    <nav
-      className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 py-6 md:px-16"
-      style={{ borderBottom: "1px solid rgba(232,224,208,0.08)" }}
-    >
-      <div className="flex items-center gap-3">
-        <BatIcon className="w-8 h-5 opacity-90" />
-        <div className="leading-none">
-          <div
-            style={{
-              fontFamily: "var(--font-mono)",
-              fontSize: "0.95rem",
-              letterSpacing: "0.25em",
-              fontWeight: 600,
-            }}
-          >
-            VESPERTILIO
-          </div>
-          <div
-            style={{
-              fontFamily: "var(--font-mono)",
-              fontSize: "0.5rem",
-              letterSpacing: "0.3em",
-              opacity: 0.5,
-              marginTop: "2px",
-            }}
-          >
-            MOTION PICTURES
-          </div>
-        </div>
-      </div>
-
-      <ul
-        className="hidden md:flex items-center gap-10"
-        style={{
-          fontFamily: "var(--font-mono)",
-          fontSize: "0.65rem",
-          letterSpacing: "0.25em",
-          opacity: 0.6,
-        }}
-      >
-        {["Work", "About", "Contact"].map((item) => (
-          <li key={item}>
-            <a
-              href="#"
-              className="hover:opacity-100 transition-opacity duration-300"
-              style={{ textTransform: "uppercase" }}
-            >
-              {item}
-            </a>
-          </li>
-        ))}
-      </ul>
-    </nav>
-  );
-}
 
 function Hero() {
   return (
@@ -156,9 +69,18 @@ function Hero() {
 
       <section className="grain relative min-h-screen overflow-hidden flex flex-col">
 
-        {/* Radial glow background — temporarily disabled */}
         {/* <RadialGlowBackground /> */}
         <MistBackground />
+        {/* <GradientBackground4 /> */}
+        {/* <div
+          className="absolute inset-0 z-0"
+          style={{
+            backgroundImage: "url('/AU-FG-Texture5-8K.jpg')",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundRepeat: "repeat",
+          }}
+        /> */}
 
         {/* Deep vignette — heavier at edges */}
         <div
@@ -317,7 +239,7 @@ function FilmsSection() {
 export default function Home() {
   return (
     <main>
-      <Nav />
+      <SimpleHeader />
       <Hero />
       <FilmsSection />
     </main>
