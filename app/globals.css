@@ -1,8 +1,9 @@
 @import "tailwindcss";
 
 :root {
-  --background: #0a0a0a;
-  --foreground: #e8e0d0;
+  --background: 10 10 10;
+  --foreground: 232 224 208;
+  --muted-foreground: 160 150 135;
   --accent: #c9a84c;
   --font-serif: "Cormorant Garamond", serif;
   --font-mono: "Geist Mono", monospace;
@@ -13,8 +14,8 @@
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background: #0a0a0a;
+  color: #e8e0d0;
   font-family: var(--font-serif);
   overflow-x: hidden;
 }

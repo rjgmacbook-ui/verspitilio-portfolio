@@ -1,3 +1,5 @@
+import { FilmList } from "@/components/ui/film-list"
+
 const BatIcon = ({ className, style }: { className?: string; style?: React.CSSProperties }) => (
   <svg
     className={className}
@@ -41,7 +43,7 @@ function Nav() {
         <div className="leading-none">
           <div
             style={{
-              fontFamily: "var(--font-serif)",
+              fontFamily: "var(--font-mono)",
               fontSize: "0.95rem",
               letterSpacing: "0.25em",
               fontWeight: 600,
@@ -143,6 +145,11 @@ function Hero() {
         .frame-counter {
           animation: counterFlicker 8s ease-in-out 4s infinite;
         }
+
+        @keyframes filmEntry {
+          from { opacity: 0; transform: translateY(18px); }
+          to   { opacity: 1; transform: translateY(0); }
+        }
       `}</style>
 
       <section className="grain relative min-h-screen overflow-hidden flex flex-col">
@@ -166,138 +173,70 @@ function Hero() {
           }}
         />
 
-        {/* Amber light leak — film scratch effect */}
-        <div
-          className="light-leak pointer-events-none absolute inset-y-0 z-20"
-          style={{
-            left: 0,
-            width: "6px",
-            background: "linear-gradient(to right, transparent, rgba(201,168,76,0.18), rgba(201,168,76,0.35), rgba(201,168,76,0.18), transparent)",
-            filter: "blur(8px)",
-          }}
-        />
 
-        {/* Bat watermark — upper right, breathing */}
-        <BatIcon
-          className="bat-watermark pointer-events-none absolute"
-          style={{
-            top: "8%",
-            right: "-4%",
-            width: "clamp(260px, 38vw, 520px)",
-            color: "#c9a84c",
-          }}
-        />
 
-        {/* Frame counter — top right corner */}
+        {/* Main content — flex row on desktop, column on mobile */}
         <div
-          className="frame-counter absolute z-30"
-          style={{
-            top: "6.5rem",
-            right: "clamp(2rem, 4vw, 4rem)",
-            fontFamily: "var(--font-mono)",
-            fontSize: "0.5rem",
-            letterSpacing: "0.25em",
-            color: "#e8e0d0",
-            lineHeight: 1.8,
-          }}
-        >
-          <div>001 / ∞</div>
-          <div style={{ opacity: 0.5 }}>MMXXV</div>
-        </div>
-
-        {/* Main content — lower left anchor */}
-        <div
-          className="relative z-30 flex flex-col justify-end flex-1"
+          className="relative z-30 flex flex-col md:flex-row flex-1"
           style={{
             padding: "clamp(2rem, 5vw, 5rem)",
             paddingBottom: "clamp(5rem, 10vh, 9rem)",
-            maxWidth: "min(1000px, 92vw)",
+            paddingTop: "clamp(7rem, 12vh, 10rem)",
+            gap: "clamp(2rem, 5vw, 5rem)",
           }}
         >
-          {/* Amber accent rule */}
-          <div
-            className="accent-line"
-            style={{
-              width: "52px",
-              height: "1px",
-              background: "#c9a84c",
-              marginBottom: "1.6rem",
-            }}
-          />
-
-          {/* Name — the centrepiece */}
-          <h1
-            className="hero-fade-1"
-            style={{
-              fontFamily: "var(--font-mono)",
-              fontStyle: "normal",
-              fontWeight: 300,
-              fontSize: "clamp(3.2rem, 8.5vw, 7.5rem)",
-              lineHeight: 1.0,
-              color: "#e8e0d0",
-              letterSpacing: "-0.03em",
-              opacity: 0,
-              marginBottom: "0.2em",
-            }}
-          >
-            Santosh MP
-          </h1>
-
-          {/* Profession */}
-          <p
-            className="hero-fade-2"
-            style={{
-              fontFamily: "var(--font-mono)",
-              fontSize: "0.6rem",
-              letterSpacing: "0.4em",
-              color: "#c9a84c",
-              opacity: 0,
-              textTransform: "uppercase",
-              marginBottom: "2.5rem",
-            }}
-          >
-            Filmmaker · Independent Cinema
-          </p>
-
-          {/* Copy + CTA */}
-          <div className="hero-fade-3" style={{ opacity: 0, display: "flex", flexDirection: "column", alignItems: "flex-start", gap: "1.8rem" }}>
-            <p
+          {/* Left — identity */}
+          <div className="flex flex-col justify-end" style={{ flex: "0 0 38%", minWidth: 0 }}>
+            <div
+              className="accent-line"
+              style={{ width: "52px", height: "1px", background: "#c9a84c", marginBottom: "1.6rem" }}
+            />
+            <h1
+              className="hero-fade-1"
               style={{
                 fontFamily: "var(--font-mono)",
-                fontStyle: "normal",
                 fontWeight: 300,
-                fontSize: "clamp(0.7rem, 1.1vw, 0.85rem)",
+                fontSize: "clamp(3.2rem, 8.5vw, 7.5rem)",
+                lineHeight: 1.0,
                 color: "#e8e0d0",
-                opacity: 0.5,
-                lineHeight: 1.9,
-                maxWidth: "360px",
-                letterSpacing: "0.05em",
+                letterSpacing: "-0.03em",
+                opacity: 0,
+                marginBottom: "0.2em",
               }}
             >
-              He doesn&apos;t document the world.
-              <br />
-              He decides what it means.
-            </p>
-            <a
-              href="#"
+              Santosh MP
+            </h1>
+            <p
+              className="hero-fade-2"
               style={{
                 fontFamily: "var(--font-mono)",
                 fontSize: "0.6rem",
-                letterSpacing: "0.25em",
+                letterSpacing: "0.4em",
+                color: "#c9a84c",
+                opacity: 0,
                 textTransform: "uppercase",
-                color: "#0a0a0a",
-                background: "#c9a84c",
-                padding: "0.85rem 1.8rem",
-                textDecoration: "none",
-                transition: "background 0.3s ease",
-                display: "inline-block",
+                marginBottom: "2.5rem",
               }}
-              className="cta-btn"
             >
-              Get in Touch
-            </a>
+              Filmmaker · Independent Cinema
+            </p>
+            <div className="hero-fade-3" style={{ opacity: 0, display: "flex", flexDirection: "column", alignItems: "flex-start", gap: "1.8rem" }}>
+              <p style={{ fontFamily: "var(--font-mono)", fontWeight: 300, fontSize: "clamp(0.7rem, 1.1vw, 0.85rem)", color: "#e8e0d0", opacity: 0.5, lineHeight: 1.9, maxWidth: "360px", letterSpacing: "0.05em" }}>
+                He doesn&apos;t document the world.
+                <br />
+                He decides what it means.
+              </p>
+              <a href="#" className="cta-btn" style={{ fontFamily: "var(--font-mono)", fontSize: "0.6rem", letterSpacing: "0.25em", textTransform: "uppercase", color: "#0a0a0a", background: "#c9a84c", padding: "0.85rem 1.8rem", textDecoration: "none", transition: "background 0.3s ease", display: "inline-block" }}>
+                Get in Touch
+              </a>
+            </div>
           </div>
-        </div>
+
+          {/* Right — film list, desktop only */}
+          <div className="hidden md:flex flex-col justify-center flex-1">
+            <FilmList />
+          </div>
+        </div>{/* end main content */}
 
         {/* Bottom bar */}
         <div
@@ -352,11 +291,29 @@ function Hero() {
   );
 }
 
+function FilmsSection() {
+  return (
+    <section
+      className="md:hidden"
+      style={{
+        background: "#0a0a0a",
+        padding: "clamp(4rem, 8vh, 7rem) clamp(2rem, 5vw, 5rem) clamp(4rem, 8vh, 7rem)",
+        borderTop: "1px solid rgba(232,224,208,0.07)",
+      }}
+    >
+      <div style={{ maxWidth: "900px", margin: "0 auto" }}>
+        <FilmList />
+      </div>
+    </section>
+  )
+}
+
 export default function Home() {
   return (
     <main>
       <Nav />
       <Hero />
+      <FilmsSection />
     </main>
   );
 }
