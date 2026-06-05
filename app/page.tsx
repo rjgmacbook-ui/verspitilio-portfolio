@@ -1,4 +1,6 @@
 import { FilmList } from "@/components/ui/film-list"
+// import { RadialGlowBackground } from "@/components/ui/radial-glow-background"
+import MistBackground from "@/components/ui/realistic-fog-background"
 
 const BatIcon = ({ className, style }: { className?: string; style?: React.CSSProperties }) => (
   <svg
@@ -154,6 +156,10 @@ function Hero() {
 
       <section className="grain relative min-h-screen overflow-hidden flex flex-col">
 
+        {/* Radial glow background — temporarily disabled */}
+        {/* <RadialGlowBackground /> */}
+        <MistBackground />
+
         {/* Deep vignette — heavier at edges */}
         <div
           className="pointer-events-none absolute inset-0 z-10"
@@ -177,7 +183,7 @@ function Hero() {
 
         {/* Main content — flex row on desktop, column on mobile */}
         <div
-          className="relative z-30 flex flex-col md:flex-row flex-1"
+          className="relative z-30 flex flex-col md:flex-row flex-1 justify-end md:justify-start"
           style={{
             padding: "clamp(2rem, 5vw, 5rem)",
             paddingBottom: "clamp(5rem, 10vh, 9rem)",
@@ -186,7 +192,7 @@ function Hero() {
           }}
         >
           {/* Left — identity */}
-          <div className="flex flex-col justify-end" style={{ flex: "0 0 38%", minWidth: 0 }}>
+          <div className="flex flex-col justify-start md:justify-end" style={{ flex: "0 0 38%", minWidth: 0 }}>
             <div
               className="accent-line"
               style={{ width: "52px", height: "1px", background: "#c9a84c", marginBottom: "1.6rem" }}
